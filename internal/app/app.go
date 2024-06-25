@@ -56,6 +56,9 @@ func (a *Application) Setup() error {
 	if err != nil {
 		return err
 	}
+	if a.Config.EtcdClientTLS.SkipClientSANVerify {
+		cfg.PeerTLSInfo.SkipClientSANVerify = true
+	}
 	a.cfg = cfg
 
 	syscall.Umask(0077)
